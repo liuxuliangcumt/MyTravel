@@ -1,20 +1,18 @@
 <script src="../../../main.js"></script>
 <template>
-  <swiper :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">
-    &lt;!&ndash; slides &ndash;&gt;
-    <swiper-slide>I'm Slide 1</swiper-slide>
-    <swiper-slide>I'm Slide 2</swiper-slide>
-    <swiper-slide>I'm Slide 3</swiper-slide>
-    <swiper-slide>I'm Slide 4</swiper-slide>
-    <swiper-slide>I'm Slide 5</swiper-slide>
-    <swiper-slide>I'm Slide 6</swiper-slide>
-    <swiper-slide>I'm Slide 7</swiper-slide>
-    &lt;!&ndash; Optional controls &ndash;&gt;
-    <div class="swiper-pagination" slot="pagination"></div>
-    <div class="swiper-button-prev" slot="button-prev"></div>
-    <div class="swiper-button-next" slot="button-next"></div>
-    <div class="swiper-scrollbar" slot="scrollbar"></div>
-  </swiper>
+  <div class="wrapper">
+
+    <swiper :options="swiperOption" ref="mySwiper">
+
+
+      <swiper-slide v-for="item of swiperList" :key="item.id">
+        <img class="swiper-img" :src="item.url"/>
+      </swiper-slide>
+      <div class="swiper-pagination" slot="pagination"/>
+    </swiper>
+
+  </div>
+
 </template>
 
 <script>
@@ -22,12 +20,37 @@
     name: "HomeSwiper",
     data() {
       return {
-        swiperOption: ''
+        swiperOption: {
+          autoplay: true,
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination',
+          }
+        },
+        swiperList: [{
+          id: 1,
+          url: "https://img1.qunarzz.com/vc/2f/8e/51/cb4d31b360c836f7d1bbe83c13.jpg"
+        }, {
+          id: 2,
+          url: "https://img1.qunarzz.com/vc/a5/e0/64/c6bd8680fb67247db15df6057b.jpg"
+        }, {
+          id: 3,
+          url: "https://img1.qunarzz.com/vc/a5/e0/64/c6bd8680fb67247db15df6057b.jpg"
+        }],
       }
     }
   }
 </script>
 
 <style scoped lang="stylus">
+  .swiper-img {
+    width 100%
+  }
 
+  .wrapper {
+    width 100%;
+    height 0;
+    overflow hidden;
+    padding-bottom 31.5%
+  }
 </style>
